@@ -240,7 +240,7 @@ class _PlacePickerState extends State<PlacePicker> {
   GlobalKey appBarKey = GlobalKey();
   late final Future<PlaceProvider> _futureProvider;
   PlaceProvider? provider;
-  SearchBarController searchBarController = SearchBarController();
+  // SearchBarController searchBarController = SearchBarController();
   bool showIntroModal = true;
 
   @override
@@ -252,7 +252,7 @@ class _PlacePickerState extends State<PlacePicker> {
 
   @override
   void dispose() {
-    searchBarController.dispose();
+    // searchBarController.dispose();
 
     super.dispose();
   }
@@ -279,7 +279,7 @@ class _PlacePickerState extends State<PlacePicker> {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () {
-          searchBarController.clearOverlay();
+          // searchBarController.clearOverlay();
           return Future.value(true);
         },
         child: FutureBuilder<PlaceProvider>(
@@ -343,65 +343,65 @@ class _PlacePickerState extends State<PlacePicker> {
         ));
   }
 
-  Widget _buildSearchBar(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        SizedBox(width: 15),
-        provider!.placeSearchingState == SearchingState.Idle &&
-                (widget.automaticallyImplyAppBarLeading ||
-                    widget.onTapBack != null)
-            ? IconButton(
-                onPressed: () {
-                  if (!showIntroModal ||
-                      widget.introModalWidgetBuilder == null) {
-                    provider?.debounceTimer?.cancel();
-                    if (widget.onTapBack != null) {
-                      widget.onTapBack!();
-                      return;
-                    }
-                    Navigator.maybePop(context);
-                  }
-                },
-                icon: Icon(
-                  Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
-                ),
-                color: Colors.black.withAlpha(128),
-                padding: EdgeInsets.zero)
-            : Container(),
-        Expanded(
-          child: AutoCompleteSearch(
-              appBarKey: appBarKey,
-              searchBarController: searchBarController,
-              sessionToken: provider!.sessionToken,
-              hintText: widget.hintText,
-              searchingText: widget.searchingText,
-              debounceMilliseconds: widget.autoCompleteDebounceInMilliseconds,
-              onPicked: (prediction) {
-                if (mounted) {
-                  _pickPrediction(prediction);
-                }
-              },
-              onSearchFailed: (status) {
-                if (widget.onAutoCompleteFailed != null) {
-                  widget.onAutoCompleteFailed!(status);
-                }
-              },
-              autocompleteOffset: widget.autocompleteOffset,
-              autocompleteRadius: widget.autocompleteRadius,
-              autocompleteLanguage: widget.autocompleteLanguage,
-              autocompleteComponents: widget.autocompleteComponents,
-              autocompleteTypes: widget.autocompleteTypes,
-              strictbounds: widget.strictbounds,
-              region: widget.region,
-              initialSearchString: widget.initialSearchString,
-              searchForInitialValue: widget.searchForInitialValue,
-              autocompleteOnTrailingWhitespace:
-                  widget.autocompleteOnTrailingWhitespace),
-        ),
-        SizedBox(width: 5),
-      ],
-    );
-  }
+  // Widget _buildSearchBar(BuildContext context) {
+  //   return Row(
+  //     children: <Widget>[
+  //       SizedBox(width: 15),
+  //       provider!.placeSearchingState == SearchingState.Idle &&
+  //               (widget.automaticallyImplyAppBarLeading ||
+  //                   widget.onTapBack != null)
+  //           ? IconButton(
+  //               onPressed: () {
+  //                 if (!showIntroModal ||
+  //                     widget.introModalWidgetBuilder == null) {
+  //                   provider?.debounceTimer?.cancel();
+  //                   if (widget.onTapBack != null) {
+  //                     widget.onTapBack!();
+  //                     return;
+  //                   }
+  //                   Navigator.maybePop(context);
+  //                 }
+  //               },
+  //               icon: Icon(
+  //                 Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+  //               ),
+  //               color: Colors.black.withAlpha(128),
+  //               padding: EdgeInsets.zero)
+  //           : Container(),
+  //       Expanded(
+  //         child: AutoCompleteSearch(
+  //             appBarKey: appBarKey,
+  //             // searchBarController: searchBarController,
+  //             sessionToken: provider!.sessionToken,
+  //             hintText: widget.hintText,
+  //             searchingText: widget.searchingText,
+  //             debounceMilliseconds: widget.autoCompleteDebounceInMilliseconds,
+  //             onPicked: (prediction) {
+  //               if (mounted) {
+  //                 _pickPrediction(prediction);
+  //               }
+  //             },
+  //             onSearchFailed: (status) {
+  //               if (widget.onAutoCompleteFailed != null) {
+  //                 widget.onAutoCompleteFailed!(status);
+  //               }
+  //             },
+  //             autocompleteOffset: widget.autocompleteOffset,
+  //             autocompleteRadius: widget.autocompleteRadius,
+  //             autocompleteLanguage: widget.autocompleteLanguage,
+  //             autocompleteComponents: widget.autocompleteComponents,
+  //             autocompleteTypes: widget.autocompleteTypes,
+  //             strictbounds: widget.strictbounds,
+  //             region: widget.region,
+  //             initialSearchString: widget.initialSearchString,
+  //             searchForInitialValue: widget.searchForInitialValue,
+  //             autocompleteOnTrailingWhitespace:
+  //                 widget.autocompleteOnTrailingWhitespace),
+  //       ),
+  //       SizedBox(width: 5),
+  //     ],
+  //   );
+  // }
 
   _pickPrediction(Prediction prediction) async {
     provider!.placeSearchingState = SearchingState.Searching;
@@ -503,7 +503,7 @@ class _PlacePickerState extends State<PlacePicker> {
       },
       onMoveStart: () {
         if (provider == null) return;
-        searchBarController.reset();
+        // searchBarController.reset();
       },
       onPlacePicked: widget.onPlacePicked,
       onCameraMoveStarted: widget.onCameraMoveStarted,
