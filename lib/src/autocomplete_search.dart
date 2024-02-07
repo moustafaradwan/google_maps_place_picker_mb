@@ -81,7 +81,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
     controller.addListener(_onSearchInputChange);
     focus.addListener(_onFocusChanged);
 
-    widget.searchBarController.attach(this);
+    // widget.searchBarController.attach(this);
   }
 
   @override
